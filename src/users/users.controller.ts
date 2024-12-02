@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 
 import { UsersService } from './users.service';
@@ -19,7 +20,7 @@ export class UsersController {
     GET /users/:id
     PATCH /users/:id
     DELETE /users/:id
-    */
+*/
 
   constructor(private readonly userService: UsersService) {}
 
@@ -48,9 +49,6 @@ export class UsersController {
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    return {
-      id,
-      message: `Deleted Id ${id}`,
-    };
+    return this.userService.delete(Number(id));
   }
 }
