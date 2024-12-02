@@ -9,6 +9,8 @@ import {
   Query,
 } from '@nestjs/common';
 
+import { UsersService } from './users.service';
+
 @Controller('users')
 export class UsersController {
   /*
@@ -18,6 +20,8 @@ export class UsersController {
     PATCH /users/:id
     DELETE /users/:id
     */
+
+  constructor(private readonly userService: UsersService) {}
 
   @Get()
   findAll(@Query('role') role: string) {
@@ -30,7 +34,7 @@ export class UsersController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return { id };
+    return this.userService.findOne(Number(id));
   }
 
   @Post()
