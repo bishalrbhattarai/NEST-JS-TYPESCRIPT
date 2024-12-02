@@ -24,12 +24,8 @@ export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @Get()
-  findAll(@Query('role') role: string) {
-    return [
-      {
-        role,
-      },
-    ];
+  findAll(@Query('role') role: 'USER' | 'ADMIN') {
+    return this.userService.findAll(role);
   }
 
   @Get(':id')
