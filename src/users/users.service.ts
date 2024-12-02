@@ -36,9 +36,21 @@ export class UsersService {
   update(
     id: number,
     updatedUser: {
-      name: string;
-      email: string;
-      role: 'ADMIN' | 'USER';
+      name?: string;
+      email?: string;
+      role?: 'ADMIN' | 'USER';
     },
-  ) {}
+  ) {
+    this.users = this.users.map((user) => {
+      if (user.id === id) {
+        return {
+          id,
+          ...user,
+          ...updatedUser,
+        };
+      } else {
+        return user;
+      }
+    });
+  }
 }
